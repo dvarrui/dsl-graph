@@ -7,7 +7,7 @@ require "debug"
 def graph(&block)
   $GRAPH ||= Dsl::Graph::Graph.new
   return $GRAPH if block.nil?
-  
-  $GRAPH.run(block)
+
+  $GRAPH.run(&block)
   $GRAPH
 end

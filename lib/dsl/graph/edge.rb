@@ -3,15 +3,14 @@
 module Dsl
   module Graph
     class Edge
-      @@id = 0
-    
       attr_reader :id
-      attr_accessor :name
+      attr_accessor :node1
+      attr_accessor :node2
     
-      def initialize(name)
-        @@id += 1
-        @id = @@id
-        @name = name
+      def initialize(id, node1, node2)
+        @id = id
+        @node1 = node1
+        @node2 = node2
       end
     end    
   end
