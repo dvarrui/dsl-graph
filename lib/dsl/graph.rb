@@ -2,14 +2,12 @@
 
 require_relative "graph/graph"
 require_relative "graph/version"
+require "debug"
 
-module Dsl
-  module Graph
-    class Error < StandardError; end
-    # Your code goes here...
-  end
-end
-
-def graph
-  $GRAPH ||= Graph.new
+def graph(&block)
+  $GRAPH ||= Dsl::Graph::Graph.new
+  return $GRAPH if block.nil?
+  
+  $GRAPH.run(block)
+  $GRAPH
 end
