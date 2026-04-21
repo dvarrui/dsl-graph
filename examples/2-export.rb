@@ -12,7 +12,5 @@ end
 
 puts "==> Exportando el grafo."
 
-filename = "data/02-graph.pdf"
-graph.export(filename)
-graph.export("data.yaml")
-graph.export
+graph.export("data/2-graph.pdf")
+graph.export("data/2-graph.pdf")
