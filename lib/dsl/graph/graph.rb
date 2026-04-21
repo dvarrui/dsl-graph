@@ -49,9 +49,8 @@ module Dsl
         end
       end
 
-      def export(format: :png, filename: 'graph')
-        filename = File.join(filename, ".png")
-        ExportGraph.to_png(self, filename)
+      def export(format: :pdf, output: 'graph')
+        ExportGraph.to_pdf(self, output)
       end
     end
   end

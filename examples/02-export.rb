@@ -2,7 +2,6 @@
 require_relative "../lib/dsl/graph"
 
 graph do
-  puts "==> Creando el grafo"
   n1 = add_node("Obiwan")
   n2 = add_node("Anakin")
   n3 = add_node("Yoda")
@@ -11,4 +10,6 @@ graph do
   add_edge(n3, n1, "maestro_de")
 end
 
-graph.export
+filename = "data/02-graph.pdf"
+puts "==> Exportando el grafo: #{filename}"
+graph.export(output: filename)
