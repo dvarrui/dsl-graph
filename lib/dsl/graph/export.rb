@@ -47,10 +47,9 @@ module Dsl::Graph
       data = {
         "graph" => {
           "label" => @graph.label,
-          "nodes" => @graph.nodes.values.map { |n| { "id" => n.id, "label" => n.label } },
+          "nodes" => @graph.nodes.values.map { |n| { "label" => n.label } },
           "edges" => @graph.edges.values.map do |e|
             {
-              "id" => e.id,
               "from" => e.from.label,
               "label" => e.label,
               "to" => e.to.label

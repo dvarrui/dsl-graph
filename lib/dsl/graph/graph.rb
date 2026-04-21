@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 require_relative "edge"
-require_relative "node"
 require_relative "export"
+require_relative "load"
+require_relative "node"
 
 module Dsl
   module Graph
     class Graph
-      attr_reader :label
+      attr_accessor :label
       attr_reader :nodes
       attr_reader :edges
 
@@ -33,7 +34,7 @@ module Dsl
       end
 
       def debug
-        puts "graph (label: #{@label})"
+        puts "graph: #{@label}"
         puts "> nodes (#{@nodes.size})"
         @nodes.each do |id, node|
           puts "  - node(#{node.id}): #{node} "
@@ -46,10 +47,18 @@ module Dsl
 
       def export(filename=nil)
         if filename.nil?
-          filename = "#{graph.label}.pdf"
-          filename = "graph.pdf" if graph.label.nil? || graph.label.empty?
+          filename = "#{graph.label}.yaml"
+          filename = "graph.yaml" if graph.label.nil? || graph.label.empty?
         end
         ExportGraph.new(self, filename).call
+      end
+
+      def load(filename=nil)
+        if filename.nil?
+          filename = "#{graph.label}.yaml"
+          filename = "graph.yaml" if graph.label.nil? || graph.label.empty?
+        end
+        LoadGraph.new(filename).call
       end
 
       def run(&block)

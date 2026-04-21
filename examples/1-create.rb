@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require_relative "../lib/dsl/graph"
 
-puts "==> Creando el grafo"
+puts "==> Create"
 
 graph do
   n1 = add_node("Obiwan")
@@ -12,5 +12,5 @@ graph do
   add_edge(n3, n1, "maestro_de")
 end
 
-puts "==> Mostrar el contenido del grafo"
+puts "==> Debug"
 graph.debug

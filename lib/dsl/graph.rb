@@ -4,8 +4,8 @@ require_relative "graph/graph"
 require_relative "graph/version"
 require "debug"
 
-def graph(&block)
-  $GRAPH ||= Dsl::Graph::Graph.new
+def graph(label=nil, &block)
+  $GRAPH ||= Dsl::Graph::Graph.new(label)
   return $GRAPH if block.nil?
 
   $GRAPH.run(&block)
