@@ -10,6 +10,9 @@ graph do
   add_edge(n3, n1, "maestro_de")
 end
 
+puts "==> Exportando el grafo."
+
 filename = "data/02-graph.pdf"
-puts "==> Exportando el grafo: #{filename}"
-graph.export(output: filename)
+graph.export(filename)
+graph.export("data.yaml")
+graph.export

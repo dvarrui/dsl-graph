@@ -11,7 +11,7 @@ module Dsl
       attr_reader :nodes
       attr_reader :edges
 
-      def initialize(labelº="graph")
+      def initialize(label="graph")
         @label = label
         @next = { node: 0, edge: 0}
         @nodes = {}
@@ -32,11 +32,6 @@ module Dsl
         edge
       end
 
-      def run(&block)
-        instance_eval(&block) 
-        self
-      end
-
       def debug
         puts "graph (name: #{@label})"
         puts "> nodes (#{@nodes.size})"
@@ -49,8 +44,18 @@ module Dsl
         end
       end
 
-      def export(format: :pdf, output: 'graph')
-        ExportGraph.to_pdf(self, output)
+      def export(filename=nil)
+        if filename.nil?
+          filename = "#{graph.label}.pdf"
+          filename = "graph.pdf" if graph.label.nil? || graph.label.empty?
+        end
+        binding.break
+        ExportGraph.new(self, filename).call
+      end
+
+      def run(&block)
+        instance_eval(&block) 
+        self
       end
     end
   end
