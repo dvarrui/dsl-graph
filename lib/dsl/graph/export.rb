@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require "graphviz"
-
+require "yaml"
+  
 module Dsl::Graph
   class ExportGraph
     def initialize(graph, filename)
@@ -10,12 +11,12 @@ module Dsl::Graph
 
     def call
       ext = File.extname(@filename.downcase)
-      
+
       case ext
       when ".pdf"
         export_to_pdf
-      when ".yaml"
-        puts "==> export yaml"
+      when ".yaml", ".yml"
+        export_to_yaml
       else
         warn "[ERROR] Unkown export format: (#{ext})"
         exit 1
@@ -40,6 +41,25 @@ module Dsl::Graph
       end
 
       Graphviz::output(viz, :path => filename)
+    end
+
+    def export_to_yaml
+      data = {
+        "graph" => {
+          "label" => @graph.label,
+          "nodes" => @graph.nodes.values.map { |n| { "id" => n.id, "label" => n.label } },
+          "edges" => @graph.edges.values.map do |e|
+            {
+              "id" => e.id,
+              "from" => e.from.label,
+              "label" => e.label,
+              "to" => e.to.label
+            }
+          end
+        }
+      }
+  
+      File.write(@filename, data.to_yaml)
     end
   end
 end

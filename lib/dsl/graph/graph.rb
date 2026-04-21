@@ -33,7 +33,7 @@ module Dsl
       end
 
       def debug
-        puts "graph (name: #{@label})"
+        puts "graph (label: #{@label})"
         puts "> nodes (#{@nodes.size})"
         @nodes.each do |id, node|
           puts "  - node(#{node.id}): #{node} "
@@ -49,7 +49,6 @@ module Dsl
           filename = "#{graph.label}.pdf"
           filename = "graph.pdf" if graph.label.nil? || graph.label.empty?
         end
-        binding.break
         ExportGraph.new(self, filename).call
       end
 

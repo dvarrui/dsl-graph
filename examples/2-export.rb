@@ -13,4 +13,4 @@ end
 puts "==> Exportando el grafo."
 
 graph.export("data/2-graph.pdf")
-graph.export("data/2-graph.pdf")
+graph.export("data/2-graph.yaml")
