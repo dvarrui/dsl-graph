@@ -6,7 +6,10 @@ require_relative "node"
 module Dsl
   module Graph
     class Graph
-      def initialize
+      attr_reader :name
+
+      def initialize(name="graph")
+        @name = name
         @next = { node: 0, edge: 0}
         @nodes = {}
         @edges = {}
@@ -19,9 +22,9 @@ module Dsl
         node
       end
 
-      def add_edge(node1, node2)
+      def add_edge(node1, node2, label)
         id = (@next[:edge] += 1)
-        edge = Edge.new(id, node1, node2)
+        edge = Edge.new(id, node1, node2, label)
         @edges[id] = edge
         edge
       end
@@ -29,6 +32,24 @@ module Dsl
       def run(&block)
         instance_eval(&block) 
         self
+      end
+
+      def debug
+        puts "graph (name: #{@name})"
+        puts "> nodes (#{@nodes.size})"
+        @nodes.each do |id, node|
+          puts "  - node(#{node.id}): #{node.name} "
+        end
+        puts "> edges (#{@edges.size})"
+        @edges.each do |id, edge| 
+          puts "  - edge(#{edge.id}): #{edge.node1.name} --(#{edge.label})--> #{edge.node2.name}"
+        end
+      end
+
+      def export(format: :png, filename: 'graph')
+        puts "==> Export graph"
+        puts " - format   : #{format}"
+        puts " - filename : #{filename}"
       end
     end
   end
