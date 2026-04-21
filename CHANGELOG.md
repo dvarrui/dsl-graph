@@ -1,8 +1,13 @@
 ## [Unreleased]
 
+## [0.3.0] - 2026-04-21
+
+- Add metadata/attributes
+- Create tests
+
 ## [0.2.1] - 2026-04-21
 
--- Add license.
+- Add license MPL-v2
 
 ## [0.2.0] - 2026-04-21
 

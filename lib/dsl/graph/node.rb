@@ -8,11 +8,17 @@ module Dsl::Graph
     def initialize(id, label)
       @id = id
       @label = label
+      @metadata = {}
     end
 
     def to_s
       @label
     end
-  end    
+
+    def [](key)
+      @metadata[key] || "NODATA"
+    end
+  
+  end
 end
 
