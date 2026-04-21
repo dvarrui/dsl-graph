@@ -2,11 +2,14 @@
 
 require_relative "edge"
 require_relative "node"
+require_relative "export"
 
 module Dsl
   module Graph
     class Graph
       attr_reader :name
+      attr_reader :nodes
+      attr_reader :edges
 
       def initialize(name="graph")
         @name = name
@@ -42,14 +45,13 @@ module Dsl
         end
         puts "> edges (#{@edges.size})"
         @edges.each do |id, edge| 
-          puts "  - edge(#{edge.id}): #{edge.node1.name} --(#{edge.label})--> #{edge.node2.name}"
+          puts "  - edge(#{edge.id}): #{edge.from.name} --(#{edge.label})--> #{edge.to.name}"
         end
       end
 
       def export(format: :png, filename: 'graph')
-        puts "==> Export graph"
-        puts " - format   : #{format}"
-        puts " - filename : #{filename}"
+        filename = File.join(filename, ".png")
+        ExportGraph.to_png(self, filename)
       end
     end
   end
