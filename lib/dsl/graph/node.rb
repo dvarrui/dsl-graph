@@ -4,11 +4,15 @@ module Dsl
   module Graph
     class Node
       attr_reader :id
-      attr_accessor :name
+      attr_accessor :label
     
-      def initialize(id, name)
+      def initialize(id, label)
         @id = id
-        @name = name
+        @label = label
+      end
+
+      def to_s
+        @label
       end
     end    
   end

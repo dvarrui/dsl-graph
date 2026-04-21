@@ -14,6 +14,10 @@ module Dsl
         @to = to
         @label = label
       end
+
+      def to_s
+        @label
+      end
     end    
   end
 end
